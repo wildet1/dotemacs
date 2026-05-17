@@ -81,7 +81,7 @@
    ("C-c m n" . 'emms-next)
    ("C-c m p" . 'emms-previous)
    ("C-c m d" . 'emms-play-directory)
-   ("<f9>" . 'emms-playlist-mode-switch-buffer))
+   ("<f9>" . 'emms-playlist-mode-go-popup))
 
 (use-package popper
   :ensure t
