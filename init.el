@@ -78,8 +78,8 @@
         (emms-track-get track 'info-title)))
   :bind
    ("C-c m P" . 'emms-pause)
-   ("C-c m n" . 'emms-previous)
-   ("C-c m p" . 'emms-pause)
+   ("C-c m n" . 'emms-next)
+   ("C-c m p" . 'emms-previous)
    ("C-c m d" . 'emms-play-directory)
    ("<f9>" . 'emms-playlist-mode-switch-buffer))
 
