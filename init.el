@@ -76,12 +76,17 @@
   (setq emms-track-description-function
       (lambda (track)
         (emms-track-get track 'info-title)))
-  :bind
+    :bind
    ("C-c m P" . 'emms-pause)
    ("C-c m n" . 'emms-next)
    ("C-c m p" . 'emms-previous)
    ("C-c m d" . 'emms-play-directory)
-   ("<f9>" . 'emms-playlist-mode-go-popup))
+   ("<f9>" . (lambda ()
+              (interactive)
+              (let ((win (get-buffer-window " *EMMS Playlist*")))
+                (if win
+                    (delete-window win)
+                  (select-window (display-buffer " *EMMS Playlist*")))))))
 
 (use-package popper
   :ensure t
@@ -102,8 +107,7 @@
 	  "^Calc:"
 	  "^\\*Shell Command Output\\*"
 	  "^\\*Async Shell Command\\*"
-	  "^\\*Completions\\*"
-	  "^\\*EMMS Playlist\\*"))
+	  "^\\*Completions\\*"))
   (popper-echo-mode 1)
   (popper-mode 1))
 
@@ -181,6 +185,13 @@
 (setq eshell-banner-message "") 
 (setq eshell-aliases-file "~/.emacs.d/aliases")
 
+;; Display-buffer alist
+(add-to-list 'display-buffer-alist
+             '("^ \\*EMMS Playlist\\*"
+               (display-buffer-in-side-window)
+               (side . left)
+               (window-width . 0.2)))
+
 ;; Tab-bar
 (global-set-key (kbd "C-,") 'tab-bar-switch-to-prev-tab)
 (global-set-key (kbd "C-.") 'tab-bar-switch-to-next-tab)
@@ -199,8 +210,8 @@
 ;; (Un)Comment line C-x C-;
 ;; M-q fix long line
 (global-set-key (kbd "C-c c") 'org-capture)
-(global-set-key (kbd "C-c e") 'eshell)
-(global-set-key (kbd "C-c t") 'vterm)
+(global-set-key (kbd "<f8>") 'eshell)
+(global-set-key (kbd "<f7>") 'vterm)
 (global-set-key (kbd "C-c s") #'my/ssh-cd)
 (global-set-key (kbd "C-c u") #'my/init-updater)
 (global-set-key (kbd "C-c x") #'compile)
