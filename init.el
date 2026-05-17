@@ -68,6 +68,21 @@
 (use-package multi-vterm
   :ensure t)
 
+(use-package emms
+  :ensure t
+  :config
+  (emms-all)
+  (setq emms-player-list '(emms-player-mpv))
+  (setq emms-track-description-function
+      (lambda (track)
+        (emms-track-get track 'info-title)))
+  :bind
+   ("C-c m P" . 'emms-pause)
+   ("C-c m n" . 'emms-previous)
+   ("C-c m p" . 'emms-pause)
+   ("C-c m d" . 'emms-play-directory)
+   ("<f9>" . 'emms-playlist-mode-switch-buffer))
+
 (use-package popper
   :ensure t
   :bind (("C-;" . popper-toggle)
@@ -87,7 +102,8 @@
 	  "^Calc:"
 	  "^\\*Shell Command Output\\*"
 	  "^\\*Async Shell Command\\*"
-	  "^\\*Completions\\*"))
+	  "^\\*Completions\\*"
+	  "^\\*EMMS Playlist\\*"))
   (popper-echo-mode 1)
   (popper-mode 1))
 
