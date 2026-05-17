@@ -185,12 +185,6 @@
 (setq eshell-banner-message "") 
 (setq eshell-aliases-file "~/.emacs.d/aliases")
 
-;; Display-buffer alist
-(add-to-list 'display-buffer-alist
-             '("^ \\*EMMS Playlist\\*"
-               (display-buffer-in-side-window)
-               (side . left)
-               (window-width . 0.2)))
 
 ;; Tab-bar
 (global-set-key (kbd "C-,") 'tab-bar-switch-to-prev-tab)
@@ -210,7 +204,7 @@
 ;; (Un)Comment line C-x C-;
 ;; M-q fix long line
 (global-set-key (kbd "C-c c") 'org-capture)
-(global-set-key (kbd "<f8>") 'eshell)
+(global-set-key (kbd "<f8>") #'my/eshell-toggle)
 (global-set-key (kbd "<f7>") 'vterm)
 (global-set-key (kbd "C-c s") #'my/ssh-cd)
 (global-set-key (kbd "C-c u") #'my/init-updater)
@@ -265,10 +259,6 @@
      (file org-default-notes-file)
      "* %U %?\n:PROPERTIES:\n:SOURCE: %^{Source}\n:END:")))
 
-(add-to-list 'display-buffer-alist
-  '("\\*Org Select\\*\\|CAPTURE"
-    (display-buffer-at-bottom)
-    (window-height . 0.25)))
 
 
 ;; Scripts
@@ -297,3 +287,36 @@
   (setq battery-mode-line-format " [%b%p%% %t]"
         battery-update-interval 30)
   (display-battery-mode 1))
+
+(defun my/eshell-toggle ()
+  (interactive)
+  (let* ((buf-name "*eshell popup*")
+         (win (get-buffer-window buf-name)))
+    (if win
+        (delete-window win)
+      (select-window (display-buffer
+                      (or (get-buffer buf-name)
+                          (save-window-excursion
+                            (eshell t)
+                            (rename-buffer buf-name)
+                            (current-buffer))))))))
+
+;; Display-buffer alist
+(add-to-list 'display-buffer-alist
+             '("^ \\*EMMS Playlist\\*"
+               (display-buffer-in-side-window)
+               (side . left)
+               (window-width . 0.2)))
+
+(add-to-list 'display-buffer-alist
+             '("\\*Org Select\\*\\|CAPTURE"
+               (display-buffer-at-bottom)
+               (window-height . 0.25)))
+
+(add-to-list 'display-buffer-alist
+             '("\\*eshell popup\\*"
+               (display-buffer-in-side-window)
+               (side . top)
+               (window-height . 0.3)))
+
+
