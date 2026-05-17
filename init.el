@@ -262,26 +262,6 @@
 
 
 ;; Scripts
-(defun my/init-updater ()
-  (interactive)
-  (let* ((hosts '("t440p" "t420" "desk" "core"))
-         (host (completing-read "Sync init.el to: " (remove (system-name) hosts)))
-         (remote-dir (format "/ssh:%s:~/.emacs.d/" host)))
-    (copy-file "~/.emacs.d/init.el"
-               (concat remote-dir "init.el")
-               t)))
-
-(defun my/ssh-cd ()
-  (interactive)
-  (let* ((hosts '("t440p" "t420" "desk" "core"))
-         (host (completing-read "Cd Into: " (remove (system-name) hosts)))
-         (win (split-window-below (- (round (* (frame-height) 0.25))))))
-    (select-window win)
-    (eshell)
-    (eshell/clear-scrollback)
-    (insert (format "cd /ssh:%s:" host))
-    (eshell-send-input)))
-
 (require 'battery)
 (when (member (system-name) '("t440p" "t420"))
   (setq battery-mode-line-format " [%b%p%% %t]"
