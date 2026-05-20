@@ -68,20 +68,40 @@
 (use-package multi-vterm
   :ensure t)
 
+(use-package olivetti
+  :ensure t)
+
+(use-package org-present
+  :ensure t
+  :hook
+  ((org-present-mode . (lambda ()
+                         (org-present-big)
+                         (org-display-inline-images)
+                         (org-present-hide-cursor)
+                         (org-present-read-only)
+                         (olivetti-mode 1)
+                         (olivetti-set-width 80)))
+   (org-present-mode-quit . (lambda ()
+                               (org-present-small)
+                               (org-remove-inline-images)
+                               (org-present-show-cursor)
+                               (org-present-read-write)
+                               (olivetti-mode 0)))))
+
 (use-package emms
   :ensure t
   :config
   (emms-all)
   (setq emms-player-list '(emms-player-mpv))
   (setq emms-track-description-function
-      (lambda (track)
-        (emms-track-get track 'info-title)))
-    :bind
-   ("C-c m P" . 'emms-pause)
-   ("C-c m n" . 'emms-next)
-   ("C-c m p" . 'emms-previous)
-   ("C-c m d" . 'emms-play-directory)
-   ("<f9>" . (lambda ()
+	(lambda (track)
+          (emms-track-get track 'info-title)))
+  :bind
+  ("C-c m P" . 'emms-pause)
+  ("C-c m n" . 'emms-next)
+  ("C-c m p" . 'emms-previous)
+  ("C-c m d" . 'emms-play-directory)
+  ("<f9>" . (lambda ()
               (interactive)
               (let ((win (get-buffer-window " *EMMS Playlist*")))
                 (if win
