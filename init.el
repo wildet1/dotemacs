@@ -66,12 +66,15 @@
   :ensure t)
 
 (use-package multi-vterm
+  :defer t
   :ensure t)
 
 (use-package olivetti
+  :defer t
   :ensure t)
 
 (use-package org-present
+  :defer t
   :ensure t
   :hook
   ((org-present-mode . (lambda ()
@@ -89,6 +92,7 @@
                                (olivetti-mode 0)))))
 
 (use-package emms
+  :defer t
   :ensure t
   :config
   (emms-all)
@@ -141,6 +145,7 @@
          ("C-:"         . mc/skip-to-previous-like-this)))
 
 (use-package org-bullets
+  :defer t
   :ensure t)
 
 (use-package paredit
@@ -194,6 +199,7 @@
 ;; Eshell
 (defvar my/eshell-hostname (system-name)
   "Cached hostname for eshell prompt.")
+
 (setq eshell-prompt-function
       (lambda ()
         (concat
