@@ -84,12 +84,16 @@
                          (org-present-read-only)
                          (olivetti-mode 1)
                          (olivetti-set-width 80)))
-   (org-present-mode-quit . (lambda ()
-                               (org-present-small)
-                               (org-remove-inline-images)
-                               (org-present-show-cursor)
-                               (org-present-read-write)
-                               (olivetti-mode 0)))))
+
+   (org-present-mode-quit-hook . (lambda ()
+     (org-present-small)
+     (org-remove-inline-images)
+     (org-present-show-cursor)
+     (org-present-read-write)
+     (olivetti-mode 0)
+     (run-at-time 0.05 nil
+                  (lambda ()
+                    (setq cursor-type 'box)))))))
 
 (use-package emms
   :defer t
