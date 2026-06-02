@@ -7,12 +7,44 @@
 (package-initialize)
 
 ;; THEME
-;; (use-package gruvbox-theme
-;;  :ensure t
-;;  :config
-;;  (load-theme 'gruvbox-dark-medium t))
-(load-theme 'modus-vivendi)
-(define-key global-map (kbd "<f5>") #'modus-themes-toggle)
+(use-package gruvbox-theme
+ :ensure t
+ :config
+ (load-theme 'gruvbox-dark-medium t))
+;; (load-theme 'modus-vivendi)
+;; (define-key global-map (kbd "<f5>") #'modus-themes-toggle)
+
+(use-package dashboard
+  :ensure t
+  :config
+  ;; Startup banner
+  (setq dashboard-startup-banner 'official)
+  ;; or:
+  ;; (setq dashboard-startup-banner "~/Pictures/emacs-banner.png")
+
+  (setq dashboard-center-content t)
+  (setq dashboard-set-heading-icons t)
+  (setq dashboard-set-file-icons t)
+
+  ;; Items to show
+  (setq dashboard-items
+        '((recents  . 8)
+          (projects . 5)
+          (agenda   . 5)))
+
+  (setq dashboard-banner-logo-title
+        "Welcome!")
+
+  (setq dashboard-footer-messages
+        '("Happy hacking "))
+
+  (dashboard-setup-startup-hook))
+
+(defun my/show-dashboard-on-client (&rest _)
+  (when (display-graphic-p)
+    (dashboard-open)))
+
+(add-hook 'server-after-make-frame-hook #'my/show-dashboard-on-client)
 
 (use-package vertico
   :ensure t
@@ -68,6 +100,13 @@
 (use-package multi-vterm
   :defer t
   :ensure t)
+
+(use-package all-the-icons :ensure t)
+;; Run M-x all-the-icons-install-fonts
+
+(use-package all-the-icons-dired
+  :ensure t
+  :hook (dired-mode . all-the-icons-dired-mode))
 
 (use-package olivetti
   :defer t
