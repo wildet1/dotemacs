@@ -32,14 +32,12 @@
           (projects . 5)
           (agenda   . 5)))
 
+  ;; (setq dashboard-footer-messages
+  ;;       '("Happy hacking "))
+
   (setq dashboard-banner-logo-title
-        "Welcome!")
-
-  (setq dashboard-footer-messages
-        '("Happy hacking "))
-
-  (dashboard-setup-startup-hook))
-
+        "Welcome!"))
+(dashboard-setup-startup-hook)
 (defun my/show-dashboard-on-client (&rest _)
   (when (display-graphic-p)
     (dashboard-open)))
