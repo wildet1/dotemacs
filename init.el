@@ -238,6 +238,7 @@
 (setq dired-recursive-copies  'always)
 (setq dired-listing-switches "-alh --group-directories-first")
 (recentf-mode 1)
+(global-hl-line-mode 1)
 
 ;; Eshell
 (defvar my/eshell-hostname (system-name)
