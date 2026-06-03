@@ -32,8 +32,8 @@
           (projects . 5)
           (agenda   . 5)))
 
-  ;; (setq dashboard-footer-messages
-  ;;       '("Happy hacking "))
+  (setq dashboard-footer-messages
+       '(""))
 
   (setq dashboard-banner-logo-title
         "Welcome!"))
