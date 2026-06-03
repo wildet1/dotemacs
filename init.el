@@ -33,7 +33,7 @@
           (agenda   . 5)))
 
   (setq dashboard-footer-messages
-       '(" "))
+       '("This is a no vim household"))
 
   (setq dashboard-banner-logo-title
         "Welcome!"))
