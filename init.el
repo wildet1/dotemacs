@@ -201,12 +201,11 @@
 
 (use-package avy
   :ensure t
-  :custom
-  (avy-timeout-seconds 0.25)
-  (avy-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
   :bind
-  ("M-j" . avy-goto-char-timer)
-  ("M-J" . avy-goto-line))    
+  (("M-j"   . avy-goto-char-in-line)
+   ("M-g c" . avy-goto-char-timer)
+   ("M-g l" . avy-goto-line)
+   ("M-g w" . avy-goto-word-1)))
 
 (use-package ace-window
   :ensure t
