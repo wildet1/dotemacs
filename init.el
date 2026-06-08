@@ -155,26 +155,27 @@
 
 (use-package popper
   :ensure t
+  :init
+  (setq popper-reference-buffers
+        '(Custom-mode
+          compilation-mode
+          messages-mode
+          help-mode
+          occur-mode
+          "^\\*Warnings\\*"
+          "^\\*Compile-Log\\*"
+          "^\\*Backtrace\\*"
+          "^\\*Apropos\\*"
+          "^Calc:"
+          "^\\*Shell Command Output\\*"
+          "^\\*Async Shell Command\\*"
+          "^\\*Completions\\*"))
   :bind (("C-;" . popper-toggle)
          ("C-'" . popper-cycle)
          ("C-M-;" . popper-toggle-type))
   :config
-  (setq popper-reference-buffers
-	'(Custom-mode
-	  compilation-mode
-	  messages-mode
-	  help-mode
-	  occur-mode
-	  "^\\*Warnings\\*"
-	  "^\\*Compile-Log\\*"
-	  "^\\*Backtrace\\*"    
-	  "^\\*Apropos\\*"
-	  "^Calc:"
-	  "^\\*Shell Command Output\\*"
-	  "^\\*Async Shell Command\\*"
-	  "^\\*Completions\\*"))
-  (popper-echo-mode 1)
-  (popper-mode 1))
+  (popper-mode 1)
+  (popper-echo-mode 1))
 
 (use-package multiple-cursors
   :ensure t
@@ -182,8 +183,8 @@
          ("C->"         . mc/mark-next-like-this)
          ("C-<"         . mc/mark-previous-like-this)
          ("C-c C-<"     . mc/mark-all-like-this)
-         ("C-\""        . mc/skip-to-next-like-this)
-         ("C-:"         . mc/skip-to-previous-like-this)))
+         ("C-c m a"     . mc/mark-all-dwim)
+         ("C-S-<mouse-1>" . mc/add-cursor-on-click)))
 
 (use-package org-bullets
   :defer t
@@ -329,7 +330,7 @@
 
 
 
-;; Scripts
+;; Functions
 (require 'battery)
 (when (member (system-name) '("t440p" "t420"))
   (setq battery-mode-line-format " [%b%p%% %t]"
@@ -348,6 +349,13 @@
                             (eshell t)
                             (rename-buffer buf-name)
                             (current-buffer))))))))
+
+(defun my/update-system ()
+  "Update Void Linux packages asynchronously."
+  (interactive)
+  (async-shell-command
+   "sudo xbps-install -Syu"
+   "*xbps-update*"))
 
 ;; Display-buffer alist
 (add-to-list 'display-buffer-alist
