@@ -17,16 +17,13 @@
 (use-package dashboard
   :ensure t
   :config
-  ;; Startup banner
   (setq dashboard-startup-banner 'official)
-  ;; or:
   ;; (setq dashboard-startup-banner "~/Pictures/emacs-banner.png")
 
   (setq dashboard-center-content t)
   (setq dashboard-set-heading-icons t)
   (setq dashboard-set-file-icons t)
 
-  ;; Items to show
   (setq dashboard-items
         '((recents  . 8)
           (projects . 5)
