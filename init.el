@@ -33,7 +33,7 @@
           (agenda   . 5)))
 
   (setq dashboard-footer-messages
-       '("This is a no vim household"))
+       '("A Monad is a Monoid in the Category of Endofunctors"))
 
   (setq dashboard-banner-logo-title
         "Welcome!"))
