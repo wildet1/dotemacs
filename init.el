@@ -70,11 +70,16 @@
 (use-package consult
   :ensure t
   :bind
-  ("C-x b"   . consult-buffer)
-  ("C-s"     . consult-line)
-  ("M-g g"   . consult-goto-line)
-  ("M-g i"   . consult-imenu)
-  ("C-x p b" . consult-project-buffer))
+  (("C-x b"   . consult-buffer)
+   ("C-s"     . consult-line)
+   ("M-g g"   . consult-goto-line)
+   ("M-g i"   . consult-imenu)
+   ("C-x p b" . consult-project-buffer)
+   ("C-x f"   . consult-find))
+
+  :custom
+  (consult-find-command
+   "fd --color=never --full-path --hidden --type f --exclude .git"))
 
 (use-package sly
   :ensure t
