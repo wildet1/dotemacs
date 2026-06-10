@@ -79,12 +79,12 @@
 
   :custom
   (consult-find-command
-   "fd --color=never --full-path --hidden --type f --exclude .git"))
+   "fd --color=never --full-path --hidden --type f"))
 
 (use-package sly
   :ensure t
   :config
-  (setq inferior-lisp-program "/usr/bin/sbcl")
+  (setq inferior-lisp-program "/usr/local/bin/sbcl")
   :hook
   (lisp-mode . sly-editing-mode))
 
