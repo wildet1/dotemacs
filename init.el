@@ -333,7 +333,7 @@
 
 ;; Functions
 (require 'battery)
-(when (member (system-name) '("t440p" "t420"))
+(when (member (system-name) '("t440p" "t420" "x1c"))
   (setq battery-mode-line-format " [%b%p%% %t]"
         battery-update-interval 30)
   (display-battery-mode 1))
