@@ -239,6 +239,7 @@
 (setq dired-listing-switches "-alh --group-directories-first")
 (recentf-mode 1)
 (global-hl-line-mode 1)
+(setq global-hl-line-sticky-flag t)
 
 ;; Eshell
 (defvar my/eshell-hostname (system-name)
