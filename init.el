@@ -19,11 +19,9 @@
   :config
   (setq dashboard-startup-banner 'official)
   ;; (setq dashboard-startup-banner "~/Pictures/emacs-banner.png")
-
   (setq dashboard-center-content t)
   (setq dashboard-set-heading-icons t)
   (setq dashboard-set-file-icons t)
-
   (setq dashboard-items
         '((recents  . 8)
           (projects . 5)
@@ -38,7 +36,6 @@
 (defun my/show-dashboard-on-client (&rest _)
   (when (display-graphic-p)
     (dashboard-open)))
-
 (add-hook 'server-after-make-frame-hook #'my/show-dashboard-on-client)
 
 (use-package vertico
@@ -46,6 +43,10 @@
   :init
   (vertico-mode))
 
+(use-package vertico-posframe
+  :ensure t
+  :init
+  (vertico-posframe-mode 1))
 (use-package vertico-directory
   :after vertico
   :ensure nil  
