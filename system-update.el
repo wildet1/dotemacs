@@ -7,23 +7,38 @@
   `(cons ,(symbol-name name)
          (lambda () ,@body)))
 
+(defun my/strip-os-release-quotes (s)
+  "Remove surrounding quotes from OS release values."
+  (if (and (string-prefix-p "\"" s)
+           (string-suffix-p "\"" s))
+      (substring s 1 -1)
+    s))
+
 (defun my/os-release-parse ()
-  "Return alist of fields from /etc/os-release."
-  (with-temp-buffer
-    (insert-file-contents "/etc/os-release")
-    (let (result)
-      (while (re-search-forward "^\\([^=]+\\)=\\(.*\\)$" nil t)
-        (let ((key (match-string 1))
-              (val (match-string 2)))
-          (setq val (string-trim val "\"'"))
-          (push (cons key val) result)))
-      result)))
+  "Return clean alist from /etc/os-release."
+  (when (file-readable-p "/etc/os-release")
+    (with-temp-buffer
+      (insert-file-contents "/etc/os-release")
+      (let (result)
+        (goto-char (point-min))
+        (while (re-search-forward
+                "^\\([A-Z_]+\\)=\\(.*\\)$"
+                nil t)
+          (let* ((key (downcase (match-string 1)))
+                 (val (match-string 2)))
+
+            ;; IMPORTANT FIX HERE
+            (setq val (my/strip-os-release-quotes val))
+            (setq val (string-trim val))
+
+            (push (cons key val) result)))
+        result))))
 
 (defun my/distro-ids ()
   "Return list of distro identifiers from ID and ID_LIKE."
   (let* ((os (my/os-release-parse))
-         (id (cdr (assoc "ID" os)))
-         (like (cdr (assoc "ID_LIKE" os))))
+         (id (cdr (assoc "id" os)))
+         (like (cdr (assoc "id_like" os))))
     (delete-dups
      (append
       (when id (list id))
