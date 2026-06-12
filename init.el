@@ -306,7 +306,26 @@
      (file org-default-notes-file)
      "* %U %?\n:PROPERTIES:\n:SOURCE: %^{Source}\n:END:")))
 
+(add-to-list 'load-path "~/.emacs.d/lisp/")
+(require 'system-update)
+(setq my/pkg-update-commands
+      (list
+       (my/pkg-update void
+         "sudo xbps-install -Syu")
 
+       (my/pkg-update arch
+         (if (executable-find "yay")
+             "yay -Syu"
+           "sudo pacman -Syu"))
+
+       (my/pkg-update debian
+         "sudo apt update && sudo apt upgrade -y")
+
+       (my/pkg-update ubuntu
+         "sudo apt update && sudo apt upgrade -y")
+
+       (my/pkg-update fedora
+         "sudo dnf upgrade --refresh")))
 
 ;; Functions
 (require 'battery)
@@ -328,12 +347,7 @@
                             (rename-buffer buf-name)
                             (current-buffer))))))))
 
-(defun my/update-system ()
-  "Update Void Linux packages asynchronously."
-  (interactive)
-  (async-shell-command
-   "sudo xbps-install -Syu"
-   "*xbps-update*"))
+
 
 ;; Display-buffer alist
 (add-to-list 'display-buffer-alist
