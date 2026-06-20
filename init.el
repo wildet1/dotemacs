@@ -84,10 +84,13 @@
 
 (use-package sly
   :ensure t
-  :config
-  (setq inferior-lisp-program "/usr/local/bin/sbcl")
   :hook
-  (lisp-mode . sly-editing-mode))
+  (lisp-mode . sly-editing-mode)
+  :config
+  (setq sly-complete-symbol-function #'sly-flex-completions)
+  (setq inferior-lisp-program "/usr/local/bin/sbcl")
+  (setq sly-complete-in-steps t)
+  (setq sly-description-autofocus t))
 
 (use-package eshell-syntax-highlighting
   :ensure t
