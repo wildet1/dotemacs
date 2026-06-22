@@ -8,12 +8,28 @@
 
 ;; THEME
 (use-package gruvbox-theme
- :ensure t
- :config
- (load-theme 'gruvbox-dark-medium t))
-;; (load-theme 'modus-vivendi)
-;; (define-key global-map (kbd "<f5>") #'modus-themes-toggle)
+ :ensure t)
 
+(use-package ef-themes
+  :ensure t
+  :init
+  (modus-themes-include-derivatives-mode 1)
+  :bind
+  ;; When accessing the function row on many laptops,
+  ;; a rebound control key will not work. In my case,
+  ;; I have to hold my actual control key, to access
+  ;; in this case the theme selector.
+  (("<f5>" . modus-themes-rotate)
+   ("C-<f5>" . modus-themes-select)
+   ("M-<f5>" . modus-themes-load-random))
+  :config
+  (setq modus-themes-mixed-fonts t)
+  (setq modus-themes-italic-constructs t))
+
+;; `modus-themes-load-random', `modus-themes-load-random-dark',
+;; `modus-themes-load-random-light').
+;; (load-theme 'gruvbox-dark-medium t)
+(modus-themes-load-theme 'ef-dream)
 (use-package dashboard
   :ensure t
   :config
@@ -43,10 +59,12 @@
   :init
   (vertico-mode))
 
-(use-package vertico-posframe
-  :ensure t
-  :init
-  (vertico-posframe-mode 1))
+;; (use-package vertico-posframe
+;;   :ensure t
+;;   :init
+;;   (vertico-posframe-mode 1)
+;;   :config)
+
 (use-package vertico-directory
   :after vertico
   :ensure nil  
