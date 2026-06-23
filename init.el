@@ -189,13 +189,9 @@
   :hook (dired-mode . all-the-icons-dired-mode))
 
 (use-package olivetti
-
-
   :ensure )
 
 (use-package org-present
-
-
   :ensure t
   :hook
   ((org-present-mode . (lambda ()
@@ -217,8 +213,6 @@
                     (setq cursor-type 'box)))))))
 
 (use-package emms
-
-
   :ensure t
   :config
   (emms-all)
@@ -246,11 +240,12 @@
          ("C-c C-<"     . mc/mark-all-like-this)
          ("C-c m a"     . mc/mark-all-dwim)
          ("C-S-<mouse-1>" . mc/add-cursor-on-click)))
+(add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
 
-(use-package org-bullets
-
-
-  :ensure )
+(use-package org-superstar
+  :ensure t
+  :hook
+  (org-mode . org-superstar-mode))
 
 (use-package paredit
   :ensure t
@@ -422,7 +417,6 @@
 
 ;; Org
 (add-hook 'org-mode-hook 'org-indent-mode)
-(add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
 (setq org-directory "~/org/")
 (setq org-default-notes-file (concat org-directory "notes.org"))
 
