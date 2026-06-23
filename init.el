@@ -98,17 +98,12 @@
   :ensure t
 
   :bind
-  (("M-." . embark-act)         ;; pick some comfortable binding
-   ("C-;" . embark-dwim)        ;; good alternative: M-.
-   ("C-h B" . embark-bindings)) ;; alternative for `describe-bindings'
+  (("M-." . embark-act)         
+   ("C-;" . embark-dwim)        
+   ("C-h B" . embark-bindings)) 
 
   :init
-
-  ;; Optionally replace the key help with a completing-read interface
   (setq prefix-help-command #'embark-prefix-help-command)
-  ;; Show the Embark target at point via Eldoc.
-  ;; (add-hook 'eldoc-documentation-functions #'embark-eldoc-first-target)
-  ;; (setq eldoc-documentation-strategy #'eldoc-documentation-compose-eagerly)
   :config
 (defun embark-which-key-indicator ()
     "An embark indicator that displays keymaps using which-key."
@@ -181,8 +176,8 @@
   :ensure t
   :defer t)
 
-(use-package all-the-icons :ensure t)
-;; Run M-x all-the-icons-install-fonts
+(use-package all-the-icons :ensure t) ; Run M-x all-the-icons-install-fonts at install
+
 
 (use-package all-the-icons-dired
   :ensure t
@@ -348,9 +343,6 @@
 (setq global-hl-line-sticky-flag t)
 
 ;; Eshell
-(defvar my/eshell-hostname (system-name)
-  "Cached hostname for eshell prompt.")
-
 (setq eshell-prompt-function
       (lambda ()
         (concat
