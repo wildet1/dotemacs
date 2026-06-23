@@ -341,6 +341,7 @@
 (recentf-mode 1)
 (global-hl-line-mode 1)
 (setq global-hl-line-sticky-flag t)
+(setq backup-directory-alist '((".*" . "~/.local/share/Trash/files")))
 
 ;; Eshell
 (setq eshell-prompt-function
