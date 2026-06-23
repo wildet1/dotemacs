@@ -29,7 +29,8 @@
 ;; `modus-themes-load-random', `modus-themes-load-random-dark',
 ;; `modus-themes-load-random-light').
 ;; (load-theme 'gruvbox-dark-medium t)
-(modus-themes-load-theme 'ef-dream)
+(modus-themes-load-theme 'ef-bio)
+
 (use-package dashboard
   :ensure t
   :config
@@ -58,12 +59,6 @@
   :ensure t
   :init
   (vertico-mode))
-
-;; (use-package vertico-posframe
-;;   :ensure t
-;;   :init
-;;   (vertico-posframe-mode 1)
-;;   :config)
 
 (use-package vertico-directory
   :after vertico
@@ -214,6 +209,57 @@
   (aw-scope 'frame)              
   :bind
   ("M-o" . ace-window))
+
+;; This is a package to center
+;; the vertico buffer, such as
+;; the one that appears when
+;; pressing M-x to execute an
+;; extended command.
+;;
+;; I have had problems with it
+;; inheriting my buffers text
+;; scaling, which made it
+;; unreadable if I had large
+;; buffer text. This is hard
+;; to fix and is due to the
+;; nature of the posframe
+;; framework.
+
+;; There are alternatives
+;; that serve the same
+;; function, such 
+
+(use-package vertico-posframe
+  :disabled t
+  :ensure t
+  :init
+  (vertico-posframe-mode 1)
+  :config)
+
+(use-package popper
+  :disabled t
+  :ensure t
+  :init
+  (setq popper-reference-buffers
+        '(Custom-mode
+          compilation-mode
+          messages-mode
+          help-mode
+          occur-mode
+          "^\\*Warnings\\*"
+          "^\\*Compile-Log\\*"
+          "^\\*Backtrace\\*"
+          "^\\*Apropos\\*"
+          "^Calc:"
+          "^\\*Shell Command Output\\*"
+          "^\\*Async Shell Command\\*"
+          "^\\*Completions\\*"))
+  :bind (("C-;" . popper-toggle)
+         ("C-'" . popper-cycle)
+         ("C-M-;" . popper-toggle-type))
+  :config
+  (popper-mode 1)
+  (popper-echo-mode 1))
 
 ;; Obvious
 (menu-bar-mode 0)
@@ -369,8 +415,6 @@
                             (rename-buffer buf-name)
                             (current-buffer))))))))
 
-
-
 ;; Display-buffer alist
 (add-to-list 'display-buffer-alist
              '("^ \\*EMMS Playlist\\*"
@@ -388,5 +432,4 @@
                (display-buffer-in-side-window)
                (side . top)
                (window-height . 0.3)))
-
 
