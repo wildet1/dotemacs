@@ -169,12 +169,17 @@
   :config
   (eshell-syntax-highlighting-global-mode 1))
 
+(use-package magit
+  :ensure t
+  :defer t)
+
 (use-package vterm
-  :ensure t)
+  :ensure t
+  :defer t)
 
 (use-package multi-vterm
-  :defer t
-  :ensure t)
+  :ensure t
+  :defer t)
 
 (use-package all-the-icons :ensure t)
 ;; Run M-x all-the-icons-install-fonts
@@ -184,11 +189,13 @@
   :hook (dired-mode . all-the-icons-dired-mode))
 
 (use-package olivetti
-  :defer t
-  :ensure t)
+
+
+  :ensure )
 
 (use-package org-present
-  :defer t
+
+
   :ensure t
   :hook
   ((org-present-mode . (lambda ()
@@ -210,7 +217,8 @@
                     (setq cursor-type 'box)))))))
 
 (use-package emms
-  :defer t
+
+
   :ensure t
   :config
   (emms-all)
@@ -240,8 +248,9 @@
          ("C-S-<mouse-1>" . mc/add-cursor-on-click)))
 
 (use-package org-bullets
-  :defer t
-  :ensure t)
+
+
+  :ensure )
 
 (use-package paredit
   :ensure t
