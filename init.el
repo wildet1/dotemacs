@@ -376,8 +376,6 @@
 (global-set-key (kbd "C-c c") 'org-capture)
 (global-set-key (kbd "<f8>") #'my/eshell-toggle)
 (global-set-key (kbd "<f7>") 'vterm)
-(global-set-key (kbd "C-c s") #'my/ssh-cd)
-(global-set-key (kbd "C-c u") #'my/init-updater)
 (global-set-key (kbd "C-c x") #'compile)
 (global-set-key (kbd "C-c C-l") 'global-display-line-numbers-mode)
 (global-set-key (kbd "C-c C-r") 'consult-recent-file)
