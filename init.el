@@ -376,6 +376,12 @@
 ;; (Un)Comment selection M-;
 ;; (Un)Comment line C-x C-;
 ;; M-q fix long line
+
+;; Paredit takes M-s, so in lisp
+;; buffers, I need a way to access
+;; my seach commands;
+(global-set-key (kbd "<f12>") (lookup-key global-map (kbd "M-s")))
+
 (global-set-key (kbd "C-c c") 'org-capture)
 (global-set-key (kbd "<f8>") #'my/eshell-toggle)
 (global-set-key (kbd "<f7>") 'vterm)
