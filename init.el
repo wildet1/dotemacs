@@ -88,11 +88,9 @@
    ("M-g g"   . consult-goto-line)
    ("M-g i"   . consult-imenu)
    ("C-x p b" . consult-project-buffer)
-   ("C-x f"   . consult-find))
-
-  :custom
-  (consult-find-command
-   "fd --color=never --full-path --hidden --type f"))
+   ("M-s r" . consult-ripgrep)
+   ("M-s f" . consult-fd)
+   ("C-c C-r" . consult-recent-file)))
 
 (use-package embark
   :ensure t
@@ -147,6 +145,11 @@
 
 (use-package embark-consult
   :ensure t) 
+
+(use-package wgrep
+  :ensure t
+  :config
+  (setq wgrep-auto-save-buffer t))
 
 (use-package sly
   :ensure t
@@ -378,7 +381,6 @@
 (global-set-key (kbd "<f7>") 'vterm)
 (global-set-key (kbd "C-c x") #'compile)
 (global-set-key (kbd "C-c C-l") 'global-display-line-numbers-mode)
-(global-set-key (kbd "C-c C-r") 'consult-recent-file)
 (global-set-key (kbd "M-n") #'scroll-up-line)
 (global-set-key (kbd "M-p") #'scroll-down-line)
 
