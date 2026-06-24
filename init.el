@@ -179,8 +179,8 @@
   :ensure t
   :defer t)
 
-(use-package all-the-icons :ensure t) ; Run M-x all-the-icons-install-fonts at install
-
+(use-package all-the-icons ; Run M-x all-the-icons-install-fonts at install
+  :ensure t) 
 
 (use-package all-the-icons-dired
   :ensure t
